@@ -8,7 +8,7 @@
       <InputText
         v-model="todoContent"
         placeholder="Todo content"
-        class="w-9/12"
+        class="w-8/12"
       />
       <Button severity="success" @click="createTodo">
         <i class="fa-solid fa-plus"></i>
