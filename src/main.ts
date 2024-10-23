@@ -7,6 +7,8 @@ import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 import { definePreset } from '@primevue/themes'
 import '@fortawesome/fontawesome-free/css/all.css'
+import ToastService from 'primevue/toastservice'
+import Toast from 'primevue/toast'
 
 Amplify.configure(outputs)
 
@@ -56,5 +58,7 @@ app.use(PrimeVue, {
     },
   },
 })
+app.use(ToastService)
+app.component('Toast', Toast)
 
 app.mount('#app')
