@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import Todos from './components/Todos.vue'
-import Button from 'primevue/button'
 
 import { Authenticator } from '@aws-amplify/ui-vue'
 import '@aws-amplify/ui-vue/styles.css'
+import Button from 'primevue/button'
 </script>
 
 <template>
-  <main class="h-screen flex content-center justify-center">
+  <main>
     <authenticator>
       <template v-slot="{ signOut }">
-        <Todos :signOut="signOut" />
+        <div class="flex justify-end p-1">
+          <Button class="p-2" @click="signOut">Sign out</Button>
+        </div>
+        <Todos />
       </template>
     </authenticator>
   </main>
