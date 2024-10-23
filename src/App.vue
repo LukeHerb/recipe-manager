@@ -7,7 +7,7 @@ import '@aws-amplify/ui-vue/styles.css'
 </script>
 
 <template>
-  <main class="h-screen flex content-center">
+  <main class="h-screen flex content-center justify-center">
     <authenticator>
       <template v-slot="{ signOut }">
         <Todos :signOut="signOut" />

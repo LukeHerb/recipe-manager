@@ -31,7 +31,9 @@ import { generateClient } from 'aws-amplify/data'
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 
-const props = defineProps(['signOut'])
+const props = defineProps({
+  signOut: Function,
+})
 
 const client = generateClient()
 
