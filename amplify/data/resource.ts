@@ -11,7 +11,7 @@ const schema = a.schema({
     .model({
       content: a.string(),
       isDone: a.boolean(),
-      owner: a.string(),
+      createdBy: a.string(),
     })
     .authorization((allow) => [allow.owner()]),
 })

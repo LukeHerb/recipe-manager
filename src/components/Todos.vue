@@ -26,7 +26,7 @@
         class="cursor-pointer bg-slate-100 p-2 rounded-lg w-full flex justify-between content-center"
       >
         {{ todo.content }}
-        Created by: {{ props.user.signInDetails.loginId }}
+        created by {{ todo.createdBy }}
         <i class="fa-solid fa-trash-can flex content-center text-red-500"></i>
       </li>
     </ul>
@@ -41,6 +41,9 @@ import { generateClient } from 'aws-amplify/data'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import { useToast } from 'primevue/usetoast'
+import { getCurrentUser } from 'aws-amplify/auth'
+
+const currentUser = ref()
 
 const toast = useToast()
 
@@ -51,12 +54,7 @@ const todos = ref<Array<Schema['Todo']['type']>>([])
 const showInput = ref(false)
 const todoContent = ref('')
 
-const props = defineProps({
-  user: {
-    type: Object,
-    required: true,
-  },
-})
+// create a reactive reference to the authenticated user
 
 function listTodos() {
   client.models.Todo.observeQuery().subscribe({
@@ -71,9 +69,10 @@ function submitTodo() {
 }
 
 function createTodo() {
+  console.log(currentUser.value.signInDetails.loginId)
   client.models.Todo.create({
     content: todoContent.value,
-    owner: props.user.signInDetails.loginId, // Attach the user
+    createdBy: currentUser.value.signInDetails.loginId,
   }).then(() => {
     // After creating a new todo, update the list of todos
     toast.add({
@@ -92,7 +91,6 @@ function createTodo() {
 
 function deleteTodo(id: string) {
   client.models.Todo.delete({ id })
-
   // After deleting a todo, update the list of todos
   toast.add({
     severity: 'error',
@@ -104,7 +102,9 @@ function deleteTodo(id: string) {
 }
 
 // fetch todos when the component is mounted
-onMounted(() => {
+onMounted(async () => {
+  currentUser.value = await getCurrentUser()
+  console.log(currentUser.value)
   listTodos()
 })
 </script>

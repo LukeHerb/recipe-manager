@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Todos from './components/Todos.vue'
 
 import { Authenticator } from '@aws-amplify/ui-vue'
@@ -14,7 +15,7 @@ import Button from 'primevue/button'
         <div class="flex justify-end p-1">
           <Button class="p-2" @click="signOut">Sign out</Button>
         </div>
-        <Todos :user="user" />
+        <Todos />
       </template>
     </authenticator>
   </main>
