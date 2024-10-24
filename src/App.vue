@@ -14,7 +14,7 @@ import Button from 'primevue/button'
         <div class="flex justify-end p-1">
           <Button class="p-2" @click="signOut">Sign out</Button>
         </div>
-        <Todos />
+        <Todos :user="user" />
       </template>
     </authenticator>
   </main>

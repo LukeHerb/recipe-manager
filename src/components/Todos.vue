@@ -26,6 +26,7 @@
         class="cursor-pointer bg-slate-100 p-2 rounded-lg w-full flex justify-between content-center"
       >
         {{ todo.content }}
+        Created by: {{ props.user.signInDetails.loginId }}
         <i class="fa-solid fa-trash-can flex content-center text-red-500"></i>
       </li>
     </ul>
@@ -50,6 +51,13 @@ const todos = ref<Array<Schema['Todo']['type']>>([])
 const showInput = ref(false)
 const todoContent = ref('')
 
+const props = defineProps({
+  user: {
+    type: Object,
+    required: true,
+  },
+})
+
 function listTodos() {
   client.models.Todo.observeQuery().subscribe({
     next: ({ items, isSynced }) => {
@@ -65,6 +73,7 @@ function submitTodo() {
 function createTodo() {
   client.models.Todo.create({
     content: todoContent.value,
+    owner: props.user.signInDetails.loginId, // Attach the user
   }).then(() => {
     // After creating a new todo, update the list of todos
     toast.add({
