@@ -9,7 +9,8 @@ import Button from 'primevue/button'
 <template>
   <main>
     <authenticator>
-      <template v-slot="{ signOut }">
+      <template v-slot="{ user, signOut }">
+        <h1>Hello {{ user?.signInDetails?.loginId }}'s todos</h1>
         <div class="flex justify-end p-1">
           <Button class="p-2" @click="signOut">Sign out</Button>
         </div>
