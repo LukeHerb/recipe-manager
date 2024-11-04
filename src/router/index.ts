@@ -1,4 +1,3 @@
-import path from 'path'
 import { createRouter, createWebHistory } from 'vue-router'
 import Recipes from '../components/Recipes.vue'
 import NewRecipe from '../components/NewRecipe.vue'
