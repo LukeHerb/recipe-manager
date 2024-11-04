@@ -20,8 +20,10 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@primevue/themes": "^4.1.1",
     "aws-amplify": "^6.4.0",
+    "primeicons": "^7.0.0",
     "primevue": "^4.1.1",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.0.4",

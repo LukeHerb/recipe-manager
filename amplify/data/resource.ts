@@ -7,13 +7,35 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
+  Recipe: a
     .model({
-      content: a.string(),
-      isDone: a.boolean(),
+      id: a.id(),
       createdBy: a.string(),
+      name: a.string(),
+      description: a.string(),
+      course: a.string(),
+      time: a.string(),
+      numServings: a.string(),
+      difficulty: a.string(),
+      ingredients: a.string().array(),
+      instructions: a.string().array(),
+      owner: a.string(),
+      reviews: a.hasMany('Review', 'recipeId'), // Define relationship
     })
-    .authorization((allow) => [allow.owner()]),
+    .authorization((allow) => [allow.authenticated()]),
+  Review: a
+    .model({
+      id: a.id(),
+      reviewStars: a.integer(),
+      reviewText: a.string(),
+      recipeId: a.string(), // Foreign key to reference Todo
+      recipe: a.belongsTo('Recipe', 'recipeId'), // Define relationship back to Todo
+      createdBy: a.string(),
+      owner: a.string(),
+    })
+    .authorization((allow) => [
+      allow.authenticated(), // All authenticated users can read.
+    ]),
 })
 
 export type Schema = ClientSchema<typeof schema>
